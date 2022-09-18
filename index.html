@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body draggable="false">
+    <div class="container">
+        <!--game ui left-->
+        <div class="cont-container">
+            <h1>Pixel Sketch</h1>
+            <div class="control">
+                <div>
+                    <label  for="color" >Color</label>
+                    <input  id ="color" type="color" name="color">
+                    
+                </div>
+
+                
+               
+                <div>
+                    <label for="grid-size">Grid Size</label>
+                    <input name="grid-size" class="grd-size" type="range"  max="100" min="16" value="16">
+                    <p>Value:<span class="value">16</span></p>
+                </div>
+                
+                <div>
+                    <button class="clear-btn">Clear</button>
+                </div>
+               
+                <div>
+                    <button class="toggle">Remove Grid</button>
+                </div>
+                <div>
+                    <button class="eraser"> Eraser</button>
+                </div>
+                
+                
+            </div>
+        </div>
+
+
+        <div class="pad">
+           
+        </div>
+    </div>
+        
+        
+</body>
+<script src="index.js"></script>
+</html>

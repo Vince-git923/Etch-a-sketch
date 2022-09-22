@@ -9,14 +9,16 @@
   let sl = document.querySelector(".slider")
   let colorr = document.querySelector("#color");
 
+  html.addEventListener('dragstart', (e) => {
+    e.preventDefault()
+  })
   
+  html.addEventListener('drop', (e) => {
+    e.preventDefault()
+  })
 function x(defSize){
 
-    newBtn.addEventListener("click",()=>{
-        grids.forEach(grid =>{
-           grid.remove();
-        })
-       })
+   
    
   let k = false
   let erase = false; 
@@ -44,92 +46,82 @@ eraser.addEventListener("click",()=>{
  erase = !erase
  
 })
-html.addEventListener('dragstart', (e) => {
-  e.preventDefault()
-})
 
-html.addEventListener('drop', (e) => {
-  e.preventDefault()
-})
-
+      
 
        for(i=0;i<`${(defSize)}` ** 2;i++){
             let p = document.createElement("div"); 
-            p.classList.add("grid");           
-            gridCont.appendChild(p)
+            p.classList.add("grid") 
+            p.addEventListener("mousedown",()=>{
+                    
+                if(erase === false && neon === true){
+                p.style.backgroundColor = `${colorr.value}`
+                p.style.boxShadow = `0 0 0px ${colorr.value}, inset  0 0 10px 3px ${colorr.value}, 0 0 20px 3px ${colorr.value}`
+                
+               }
+               else if(erase === true ){
+                p.style.backgroundColor = "transparent"
+                p.style.boxShadow = "none"
+               }
+            })  
+
+            p.addEventListener("mouseenter",()=>{
+                if(erase === true && k === true){
+                    p.style.backgroundColor =`transparent`;
+                    p.style.boxShadow = "none"
+                    
+                }
+                else if(k === true && neon === true){
+                p.style.backgroundColor =`${colorr.value}`;
+                p.style.boxShadow = `0 0 0px ${colorr.value}, inset  0 0 10px 3px ${colorr.value}, 0 0 20px 3px ${colorr.value}`
+
+                }
+                else if(k === true && neon === false){
+                    p.style.backgroundColor =`${colorr.value}`;
+                    p.style.boxShadow = "none"
+                };
+                clr.addEventListener("click",()=>{
+       
+                    p.style.backgroundColor = "transparent"  
+                    p.style.boxShadow = "none"    
+                })
+
+                                  
+            })  
+                   
+            gridCont.insertAdjacentElement("afterbegin",p)
         }
        
         
         gridCont.style.gridTemplateColumns = `repeat(${defSize},1fr)`;
         gridCont.style.gridTemplateRows = `repeat(${defSize},1fr)`;
         
-        let grids = document.querySelectorAll(".grid") 
-                
-       
-           
         
-
+                
+       let grids = document.querySelectorAll(".grid")
+        
+       togglegrid.addEventListener("click",()=>{
+           
+           grids.forEach(grid =>{
+            grid.classList.toggle("grid");  
+           })         
+        })  
+        newBtn.addEventListener("click",()=>{
             
-   
+            grids.forEach(grid =>{
+                grid.remove(); 
+            })   
+        
+        })
+        
   
       togglegrid.classList.remove("red")  
       eraser.classList.remove("red")
       sl.classList.remove("slide-on")
                     
      
-            grids.forEach(grid =>{
-                clr.addEventListener("click",()=>{
-           
-                    grid.style.backgroundColor = "transparent"  
-                    grid.style.boxShadow = "none"    
-                })
 
-                
-                grid.addEventListener("mousedown",()=>{
-                        
-                    if(erase === false && neon === true){
-                    grid.style.backgroundColor = `${colorr.value}`
-                    grid.style.boxShadow = `0 0 0px ${colorr.value}, inset  0 0 10px 3px ${colorr.value}, 0 0 20px 3px ${colorr.value}`
-                    
-                   }
-                   else if(erase === true ){
-                    grid.style.backgroundColor = "transparent"
-                    grid.style.boxShadow = "none"
-                   }
-                })  
-
-                grid.addEventListener("mouseenter",()=>{
-                    if(erase === true && k === true){
-                        grid.style.backgroundColor =`transparent`;
-                        grid.style.boxShadow = "none"
-                        
-                    }
-                    else if(k === true && neon === true){
-                    grid.style.backgroundColor =`${colorr.value}`;
-                    grid.style.boxShadow = `0 0 0px ${colorr.value}, inset  0 0 10px 3px ${colorr.value}, 0 0 20px 3px ${colorr.value}`
-
-                    }
-                    else if(k === true && neon === false){
-                        grid.style.backgroundColor =`${colorr.value}`;
-                        grid.style.boxShadow = "none"
-                    };
-                                        
-                })     
-                
-                
-            })
             
-        
-        
-      
-
-        togglegrid.addEventListener("click",()=>{
-           
-            grids.forEach(grid =>{
-                grid.classList.toggle("grid");      
-            })
-           
-        })       
 
 }
 
@@ -139,6 +131,11 @@ x(16)
    
 newBtn.addEventListener("click",()=>{
     x(newBtn.value)
+    para.innerText = ` ${newBtn.value} X ${newBtn.value}`;
+  
+})
+newBtn.addEventListener("mousemove",()=>{
+    
     para.innerText = ` ${newBtn.value} X ${newBtn.value}`;
   
 })
